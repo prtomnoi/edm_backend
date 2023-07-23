@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="my-2">Get Subscribers youtube</h1>
+                 <input type="text" class="form-control" id="input-text">
+                 <button class="btn btn-danger my-2" type="button" onclick="getSubscribers(document.getElementById('input-text').value)">Find it.</button>
+                 <h4 id="subCount"></h4>
+            </div>
+        </div>
+    </div>
+    
+ 
+    
+    <script>
+
+    // Get Subscribers
+    const youtubeKey = 'AIzaSyDM36EKvcTSFqnXVXSLPY4duPDW2bzCKeo';
+    // const youtubeUser = 'UC3SdeibuuvF-ganJesKyDVQ';
+    const subCount = document.getElementById('subCount');
+
+    let getSubscribers = (youtubeUser) => {
+
+        fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${youtubeUser}&key=${youtubeKey}`)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data);
+            subCount.innerHTML = "YouTube Subscribers : " +data["items"][0].statistics.subscriberCount;
+        })
+    }
+
+    getSubscribers();
+
+    </script>
+</body>
+</html>
