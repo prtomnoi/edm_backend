@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title', 'Home') | EDM</title>
   <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.png" />
-  <link rel="stylesheet" href="assets/css/styles.min.css" />
-  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
-  <link rel="stylesheet" href="assets/css/select2.min.css">
+  
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.min.css'); }}" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap5.min.css'); }}">
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/select2.min.css'); }}">
 </head>
 
 <body>
@@ -21,7 +22,7 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-center">
           <a href="#" class="text-nowrap logo-img">
-            <img src="assets/images/logos/logo-edm.png" width="180" alt="" />
+            <img src="{{ URL::asset('assets/images/logos/logo-edm.png'); }}" width="180" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -41,11 +42,11 @@
             </li>
           
             <li class="sidebar-item">
-              <a class="sidebar-link" href="news" aria-expanded="false">
+              <a class="sidebar-link" href="{{ route('news.index') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
-                <span class="hide-menu">News</span>
+                <span class="hide-menu">News page</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -53,7 +54,15 @@
                 <span>
                   <i class="ti ti-star"></i>
                 </span>
-                <span class="hide-menu">Influencer</span>
+                <span class="hide-menu">Influencer page</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="influencer" aria-expanded="false">
+                <span>
+                  <i class="ti ti-package"></i>
+                </span>
+                <span class="hide-menu">Campaign page</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -133,14 +142,13 @@
        @yield('content')
     </div>
   </div>
-  <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/sidebarmenu.js"></script>
-  <script src="assets/js/app.min.js"></script>
-  <script src="assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="assets/libs/simplebar/dist/simplebar.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="{{ URL::asset('assets/libs/jquery/dist/jquery.min.js'); }}"></script>
+  <script src="{{ URL::asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js'); }}"></script>
+  <script src="{{ URL::asset('assets/js/sidebarmenu.js'); }}"></script>
+  <script src="{{ URL::asset('assets/js/app.min.js'); }}"></script>
+  <script src="{{ URL::asset('assets/libs/apexcharts/dist/apexcharts.min.js'); }}"></script>
+  <script src="{{ URL::asset('assets/libs/simplebar/dist/simplebar.js'); }}"></script>
+  <script src="{{ URL::asset('assets/js/dataTables.bootstrap5.min.js'); }}"></script>
 </body>
   <script>
         $(document).ready(function(){

@@ -15,6 +15,16 @@ use App\Http\Controllers\NewsController;
 |
 */
 
+Route::get('/test-connection', function () {
+    try {
+        DB::connection()->getPdo();
+        return "Database connection is successful!";
+    } catch (\Exception $e) {
+        return "Database connection failed: " . $e->getMessage();
+    }
+});
+
+
 Route::get('/', function () {
     return view('login');
 });
