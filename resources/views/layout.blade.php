@@ -149,10 +149,14 @@
   <script src="{{ URL::asset('assets/libs/apexcharts/dist/apexcharts.min.js'); }}"></script>
   <script src="{{ URL::asset('assets/libs/simplebar/dist/simplebar.js'); }}"></script>
   <script src="{{ URL::asset('assets/js/dataTables.bootstrap5.min.js'); }}"></script>
+  <script src="{{ URL::asset('assets/js/sweetalert2.all.min.js'); }}"></script>
 </body>
   <script>
         $(document).ready(function(){
             var dataTable = $('#myTable').DataTable();
         });
   </script>
+
+
+@yield('javascript')
 </html>

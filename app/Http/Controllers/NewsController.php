@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Provider;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class NewsController extends Controller
 {
     /**
@@ -53,7 +53,7 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -100,9 +100,16 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        $news = News::findOrFail($id);
-        $news->delete();
-
-        return redirect()->route('news.index')->with('success', 'News deleted successfully!');
+     
+        try {
+            DB::beginTransaction();
+            $news = News::findOrFail($id);
+            $news->delete();
+            DB::commit();
+            return response()->json(['message' => 'Successfully'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Something broke'], 500);
+        }
     }
 }
