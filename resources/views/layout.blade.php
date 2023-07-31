@@ -50,7 +50,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="influencer" aria-expanded="false">
+              <a class="sidebar-link" href="{{ route('influencer.index') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-star"></i>
                 </span>
@@ -58,7 +58,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="influencer" aria-expanded="false">
+              <a class="sidebar-link" href="{{ route('campaign.index') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-package"></i>
                 </span>
@@ -66,7 +66,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="account" aria-expanded="false">
+              <a class="sidebar-link" href="#" aria-expanded="false">
                 <span>
                   <i class="ti ti-users"></i>
                 </span>
@@ -118,7 +118,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <img src="{{ URL::asset('assets/images/profile/user-1.jpg'); }}" alt="" width="35" height="35" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
@@ -151,6 +151,7 @@
   <script src="{{ URL::asset('assets/js/dataTables.bootstrap5.min.js'); }}"></script>
   <script src="{{ URL::asset('assets/js/sweetalert2.all.min.js'); }}"></script>
 </body>
+@yield('scripts')
   <script>
         $(document).ready(function(){
             var dataTable = $('#myTable').DataTable();
