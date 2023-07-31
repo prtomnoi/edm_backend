@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\InfluencerController;
+use App\Http\Controllers\CampaignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,5 @@ Route::get('/', function () {
 
 Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');
 Route::resource('/news' , NewsController::class);
+Route::resource('/influencer' , InfluencerController::class);
+Route::resource('/campaign' , CampaignController::class);

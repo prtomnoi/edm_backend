@@ -19,7 +19,7 @@
                       </div>
                       <div class="form-group mb-2">
                         <label for="">Detail</label>
-                        <textarea name="detail" class="form-control"  placeholder="Detail"></textarea>
+                        <textarea name="detail" class="form-control"  placeholder="Detail" id="editor"></textarea>
                      </div>
                       <div class="form-group mb-2">
                         <label for="">Provider</label>
@@ -53,5 +53,12 @@
             </div>
           </div>
       </div>
+ 
+  @endsection
   
+  @section('scripts')
+  <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+  <script>
+    CKEDITOR.replace( 'editor' );
+</script>
   @endsection
