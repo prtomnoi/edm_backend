@@ -59,17 +59,21 @@
 
 @section('scripts')
 <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
-<script>
-  CKEDITOR.replace( 'editor' );
+    <script>
+        CKEDITOR.config.allowedContent = true;
+        CKEDITOR.replace('editor', {
+            filebrowserUploadUrl: "{{ route('upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadMethod: 'form',
+        });
 
-  function readURL01(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#example_image01').attr('src', e.target.result);
+        function readURL01(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#example_image01').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-</script>
+    </script>
 @endsection

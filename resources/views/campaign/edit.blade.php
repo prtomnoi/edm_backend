@@ -74,7 +74,11 @@
 @section('scripts')
 <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 <script>
-  CKEDITOR.replace( 'editor' );
+CKEDITOR.config.allowedContent = true;
+        CKEDITOR.replace('editor', {
+            filebrowserUploadUrl: "{{ route('upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadMethod: 'form',
+        });
 
   function readURL01(input) {
         if (input.files && input.files[0]) {

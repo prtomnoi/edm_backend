@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FunctionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\InfluencerController;
@@ -33,9 +34,7 @@ Route::get('/', function () {
 
 Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');
 
-Route::prefix('news')->group(function () {
-
-});
+Route::post('/uploadimage_text', [FunctionController::class, 'uploadimage_text'])->name('upload');
 
 Route::resource('/news' , NewsController::class);
 Route::get('/news/status/{id}', [NewsController::class, 'status'])->where(['id' => '[0-9]+']);
