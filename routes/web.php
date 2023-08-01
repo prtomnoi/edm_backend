@@ -5,6 +5,7 @@ use App\Http\Controllers\FunctionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\InfluencerController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CampaignController;
 
 /*
@@ -28,19 +29,23 @@ Route::get('/test-connection', function () {
 });
 
 
-Route::get('/', function () {
-    return view('login');
+// Route::get('/', function () { return view('login'); });
+Route::get('/', [LoginController::class, 'getLogin']);
+Route::post('/', [LoginController::class, 'postLogin']);
+Route::get('logout', [LoginController::class, 'logOut']);
+
+Route::group(['middleware' => ['Admin']], function () {
+    Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');
+
+    Route::post('/uploadimage_text', [FunctionController::class, 'uploadimage_text'])->name('upload');
+    
+    Route::resource('/news' , NewsController::class);
+    Route::get('/news/status/{id}', [NewsController::class, 'status'])->where(['id' => '[0-9]+']);
+    
+    Route::resource('/influencer' , InfluencerController::class);
+    Route::get('/influencer/status/{id}', [InfluencerController::class, 'status'])->where(['id' => '[0-9]+']);
+    
+    Route::resource('/campaign' , CampaignController::class);
+    Route::get('/campaign/status/{id}', [CampaignController::class, 'status'])->where(['id' => '[0-9]+']);
 });
 
-Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');
-
-Route::post('/uploadimage_text', [FunctionController::class, 'uploadimage_text'])->name('upload');
-
-Route::resource('/news' , NewsController::class);
-Route::get('/news/status/{id}', [NewsController::class, 'status'])->where(['id' => '[0-9]+']);
-
-Route::resource('/influencer' , InfluencerController::class);
-Route::get('/influencer/status/{id}', [InfluencerController::class, 'status'])->where(['id' => '[0-9]+']);
-
-Route::resource('/campaign' , CampaignController::class);
-Route::get('/campaign/status/{id}', [CampaignController::class, 'status'])->where(['id' => '[0-9]+']);
