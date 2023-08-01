@@ -38,5 +38,10 @@ Route::prefix('news')->group(function () {
 });
 
 Route::resource('/news' , NewsController::class);
+Route::get('/news/status/{id}', [NewsController::class, 'status'])->where(['id' => '[0-9]+']);
+
 Route::resource('/influencer' , InfluencerController::class);
+Route::get('/influencer/status/{id}', [InfluencerController::class, 'status'])->where(['id' => '[0-9]+']);
+
 Route::resource('/campaign' , CampaignController::class);
+Route::get('/campaign/status/{id}', [CampaignController::class, 'status'])->where(['id' => '[0-9]+']);
