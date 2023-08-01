@@ -11,8 +11,9 @@
                     <div class="card-body p-4">
                         <h5 class="card-title fw-semibold mb-4">Add News </h5>
 
-                        <form action="{{ route('news.update',$news->id) }}" method="PUT" enctype="multipart/form-data">
+                        <form action="{{ route('news.update',$news->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            {{ method_field('PUT') }}
                             <div class="form-group mb-2">
                                 <label for="">Title</label>
                                 <input type="text" class="form-control" name="title" placeholder="Title" value="{{@$news->title}}">

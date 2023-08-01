@@ -32,26 +32,26 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-       try{
-            DB::beginTransaction();
-            $data = $request->validate([
-                'title' => 'required|string|max:255',
-                'detail' => 'required|string',
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'status' => 'required|in:draft,published',
-                'provider_id' => 'required|exists:providers,id',
-            ]);
-            // Upload the image and save its path in the database
-            if ($request->hasFile('image')) {
-                $upImage = Helper::upload_image($request->file('image'),'news',412,300);
-                // $imagePath = $request->file('image')->store('news_images', 'public');
-                $data['image'] = $upImage['image'];
-            }
-            News::create($data);
-            DB::commit();
-            return redirect()->route('news.index')->with('success', 'News created successfully!');
-       }
-       catch (\Exception $e) {
+        try{
+                DB::beginTransaction();
+                $data = $request->validate([
+                    'title' => 'required|string|max:255',
+                    'detail' => 'required|string',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'status' => 'required|in:draft,published',
+                    'provider_id' => 'required|exists:providers,id',
+                ]);
+                // Upload the image and save its path in the database
+                if ($request->hasFile('image')) {
+                    $upImage = Helper::upload_image($request->file('image'),'news',412,300);
+                    // $imagePath = $request->file('image')->store('news_images', 'public');
+                    $data['image'] = $upImage['image'];
+                }
+                News::create($data);
+                DB::commit();
+                return redirect()->route('news.index')->with('success', 'News created successfully!');
+        }
+        catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('news.index')->with('error', 'Error');
         }
@@ -82,26 +82,32 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'detail' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:draft,published',
-            'provider_id' => 'required|exists:providers,id',
-        ]);
+        try{
+            DB::beginTransaction();
+            $data = $request->validate([
+                'title' => 'required|string|max:255',
+                'detail' => 'required|string',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'status' => 'required|in:draft,published',
+                'provider_id' => 'required|exists:providers,id',
+            ]);
 
-        // Associate the user who updated the news item
-        $data['updated_by'] = $request->user()->id;
-
-        // Upload the image and save its path in the database
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news_images', 'public');
-            $data['image'] = $imagePath;
+            // Upload the image and save its path in the database
+            if ($request->hasFile('image')) {
+                if($news->image != null){
+                    try { Storage::disk('public')->delete($news->image); } catch (\Exception $e) {}
+                }
+                $upImage = Helper::upload_image($request->file('image'),'news',412,300);
+                $data['image'] = $upImage['image'];
+            }
+            $news->update($data);
+            DB::commit();
+            return redirect()->route('news.index')->with('success', 'News created successfully!');
         }
-
-        $news->update($data);
-
-        return redirect()->route('news.index')->with('success', 'News updated successfully!');
+        catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('news.index')->with('error', 'Error');
+        }
     }
 
     /**

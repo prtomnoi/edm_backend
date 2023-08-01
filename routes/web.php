@@ -32,6 +32,11 @@ Route::get('/', function () {
 });
 
 Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');
+
+Route::prefix('news')->group(function () {
+
+});
+
 Route::resource('/news' , NewsController::class);
 Route::resource('/influencer' , InfluencerController::class);
 Route::resource('/campaign' , CampaignController::class);
