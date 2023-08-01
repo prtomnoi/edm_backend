@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Helpers\Helper;
 use App\Models\News;
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 class NewsController extends Controller
 {
@@ -30,22 +32,29 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'detail' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:draft,published',
-            'provider_id' => 'required|exists:providers,id',
-        ]);
-          // Upload the image and save its path in the database
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news_images', 'public');
-            $data['image'] = $imagePath;
+       try{
+            DB::beginTransaction();
+            $data = $request->validate([
+                'title' => 'required|string|max:255',
+                'detail' => 'required|string',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'status' => 'required|in:draft,published',
+                'provider_id' => 'required|exists:providers,id',
+            ]);
+            // Upload the image and save its path in the database
+            if ($request->hasFile('image')) {
+                $upImage = Helper::upload_image($request->file('image'),'news',412,300);
+                // $imagePath = $request->file('image')->store('news_images', 'public');
+                $data['image'] = $upImage['image'];
+            }
+            News::create($data);
+            DB::commit();
+            return redirect()->route('news.index')->with('success', 'News created successfully!');
+       }
+       catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('news.index')->with('error', 'Error');
         }
-
-        News::create($data);
-
-        return redirect()->route('news.index')->with('success', 'News created successfully!');
     }
 
     /**
@@ -100,10 +109,12 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-     
         try {
             DB::beginTransaction();
             $news = News::findOrFail($id);
+            if($news->image != null){
+                try { Storage::disk('public')->delete($news->image); } catch (\Exception $e) {}
+            }
             $news->delete();
             DB::commit();
             return response()->json(['message' => 'Successfully'], 200);

@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">Detail</label>
-                                <textarea name="detail" class="form-control" placeholder="Detail">{{@$news->detail}}</textarea>
+                                <textarea name="detail" class="form-control" placeholder="Detail" id="editor">{{@$news->detail}}</textarea>
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">Provider</label>
@@ -29,9 +29,12 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group col-4 mb-2">
+                                <img id="example_image01" src="@if($news->image){{asset("$news->image")}}@else {{asset("assets/noimage.jpg")}}@endif" class="img-fluid" alt="" style="width:100%">
+                            </div>
                             <div class="form-group mb-2">
                                 <label for="">File</label>
-                                <input type="file" name="image" class="form-control">
+                                <input type="file" name="image" accept="image/png, image/gif, image/jpeg" onchange="readURL01(this);" class="form-control">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">Status</label>
@@ -50,4 +53,22 @@
         </div>
     </div>
 
+@endsection
+
+
+@section('scripts')
+<script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace( 'editor' );
+
+  function readURL01(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#example_image01').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 @endsection

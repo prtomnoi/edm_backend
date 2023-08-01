@@ -34,7 +34,7 @@
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
-                                        <th class="border-bottom-0">
+                                        <th class="border-bottom-0 text-center">
                                             <h6 class="fw-semibold mb-0">Action</h6>
                                         </th>
 
@@ -46,19 +46,19 @@
                                     @foreach(@$news as $key=>$item)
                                       <tr>
                                         
-                                          <td>{{$key+1}}</td>
-                                          <td>{member.branch}</td>
-                                          <td>{{$item->title}}</td>
-                                          <td>{{$item->provider->name}}</td>
-                                          <td>{{ Helper::dateThai($item->created_at) }}</td>
-                                          <td>
+                                          <td style="width:5%;">{{$key+1}}</td>
+                                          <td style="width:10%;"><a href="{{$item->image}}" target="_blank"><img src="{{$item->image}}" alt="" style="width:100%;"></a></td>
+                                          <td style="width:35%;">{{$item->title}}</td>
+                                          <td style="width:15%;">{{$item->provider->name}}</td>
+                                          <td style="width:15%;">{{ Helper::dateThai($item->created_at) }}</td>
+                                          <td style="width:10%;">
                                               <div class="form-check form-switch">
                                                   <input class="form-check-input" type="checkbox" role="switch"
                                                       id="flexSwitchCheckChecked" checked>
 
                                               </div>
                                           </td>
-                                          <td>
+                                          <td class="text-center" style="width:10%;">
                                               <a href="{{route('news.edit',$item->id)}}" class="btn btn-warning"><i class="ti ti-pencil"></i> Edit</a>
                                               <a href="javascript:void(0)" onclick="destroy('{{$item->id}}')" class="btn btn-danger"><i class="ti ti-trash"></i> Delete</a>
                                           </td>
