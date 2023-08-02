@@ -95,10 +95,7 @@ class NewsController extends Controller
             // Upload the image and save its path in the database
             if ($request->hasFile('image')) {
                 if ($news->image != null) {
-                    try {
-                        Storage::disk('public')->delete($news->image);
-                    } catch (\Exception $e) {
-                    }
+                    Storage::disk('public')->delete($news->image);
                 }
                 $upImage = Helper::upload_image($request->file('image'), 'news', 412, 300);
                 $data['image'] = $upImage['image'];

@@ -119,10 +119,7 @@ class InfluencerController extends Controller
             // Upload the image and save its path in the database
             if ($request->hasFile('icon')) {
                 if ($influencer->icon != null) {
-                    try {
-                        Storage::disk('public')->delete($influencer->icon);
-                    } catch (\Exception $e) {
-                    }
+                    Storage::disk('public')->delete($influencer->icon);
                 }
                 $upImage = Helper::upload_image($request->file('icon'), 'influencer/icon', 77, 77);
                 $data['icon'] = $upImage['image'];
@@ -130,10 +127,7 @@ class InfluencerController extends Controller
 
             if ($request->hasFile('image')) {
                 if ($influencer->image != null) {
-                    try {
-                        Storage::disk('public')->delete($influencer->image);
-                    } catch (\Exception $e) {
-                    }
+                    Storage::disk('public')->delete($influencer->image);
                 }
                 $upImage = Helper::upload_image($request->file('image'), 'influencer', 301, 399);
                 $data['image'] = $upImage['image'];
