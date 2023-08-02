@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Home') | EDM</title>
-    <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="{{ URL::asset('assets/images/logos/logo-edm.png') }}" />
 
     <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -34,7 +34,7 @@
                     <ul id="sidebarnav">
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="index" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('admin.home') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
                                 </span>
@@ -86,7 +86,7 @@
                                 <span class="hide-menu">Logout</span>
                             </a>
                         </li>
-
+                        
                     </ul>
 
                 </nav>
@@ -154,7 +154,7 @@
     <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/simplebar/dist/simplebar.js') }}"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/sweetalert2.all.min.js') }}"></script>
 </body>

@@ -33,6 +33,7 @@ Route::get('/test-connection', function () {
 Route::get('/', [LoginController::class, 'getLogin']);
 Route::post('/', [LoginController::class, 'postLogin']);
 Route::get('logout', [LoginController::class, 'logOut']);
+// Route::get('regis', [LoginController::class, 'createDummy']);
 
 Route::group(['middleware' => ['Admin']], function () {
     Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');

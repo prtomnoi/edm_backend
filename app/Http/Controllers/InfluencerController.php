@@ -45,6 +45,7 @@ class InfluencerController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->validate([
+                'name' => 'required|string|max:255',
                 'title' => 'required|string|max:255',
                 'subscribe' => 'string|max:255',
                 'facebook' => 'string|max:255',
@@ -103,6 +104,7 @@ class InfluencerController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->validate([
+                'name' => 'required|string|max:255',
                 'title' => 'required|string|max:255',
                 'subscribe' => 'string|max:255',
                 'facebook' => 'string|max:255',

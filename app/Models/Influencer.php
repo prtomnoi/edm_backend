@@ -9,7 +9,7 @@ class Influencer extends Model
 {
     use HasFactory;
     protected $table = 'influencer';
-    protected $fillable = ['title', 'subscribe', 'facebook', 'twitter', 'youtube', 'instagram', 'icon', 'image', 'status', 'created_by', 'updated_by'];
+    protected $fillable = ['name','title', 'subscribe', 'facebook', 'twitter', 'youtube', 'instagram', 'icon', 'image', 'status', 'created_by', 'updated_by'];
  
     public function createdBy()
     {

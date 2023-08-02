@@ -14,6 +14,10 @@
                         <form action="{{ route("$folder.store") }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-2">
+                                <label for="">Influencer Name</label>
+                                <input type="text" class="form-control" name="name" placeholder="Influencer Name">
+                            </div>
+                            <div class="form-group mb-2">
                                 <label for="">Title</label>
                                 <input type="text" class="form-control" name="title" placeholder="Title">
                             </div>
@@ -41,7 +45,7 @@
                             </div>
 
                             <div class="form-group col-4 mb-2">
-                                <img id="example_image02" src="{{ asset('assets/noimage.jpg') }}" class="img-fluid" alt="" style="width:100%">
+                                <img id="example_image02" src="{{ asset('assets/noimage.jpg') }}" class="img-fluid" alt="" style="width:200px">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">Icon</label>
@@ -49,7 +53,7 @@
                             </div>
 
                             <div class="form-group col-4 mb-2">
-                                <img id="example_image01" src="{{ asset('assets/noimage.jpg') }}" class="img-fluid" alt="" style="width:100%">
+                                <img id="example_image01" src="{{ asset('assets/noimage.jpg') }}" class="img-fluid" alt="" style="width:200px">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">File</label>

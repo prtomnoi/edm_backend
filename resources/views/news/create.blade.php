@@ -30,7 +30,7 @@
                       </select>
                        </div>
                        <div class="form-group col-4 mb-2">
-                          <img id="example_image01" src="{{asset("assets/noimage.jpg")}}" class="img-fluid" alt="" style="width:100%">
+                          <img id="example_image01" src="{{asset("assets/noimage.jpg")}}" class="img-fluid" alt="" style="width:200px">
                       </div>
                       <div class="form-group mb-2">
                         <label for="">File</label>

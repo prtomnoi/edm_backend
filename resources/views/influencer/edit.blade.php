@@ -15,6 +15,10 @@
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="form-group mb-2">
+                                <label for="">Influencer Name</label>
+                                <input type="text" class="form-control" name="name" placeholder="Influencer Name"  value="{{@$row->name}}">
+                            </div>
+                            <div class="form-group mb-2">
                                 <label for="">Title</label>
                                 <input type="text" class="form-control" name="title" placeholder="Title" value="{{@$row->title}}">
                             </div>
@@ -42,7 +46,7 @@
                             </div>
                             
                             <div class="form-group col-2 mb-2">
-                                <img id="example_image02" src="@if($row->icon){{asset("$row->icon")}}@else {{asset("assets/noimage.jpg")}}@endif" class="img-fluid" alt="" style="width:100%">
+                                <img id="example_image02" src="@if($row->icon){{asset("$row->icon")}}@else {{asset("assets/noimage.jpg")}}@endif"   alt="" style="width:200px">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">Icon</label>
@@ -50,7 +54,7 @@
                             </div>
 
                             <div class="form-group col-4 mb-2">
-                                <img id="example_image01" src="@if($row->image){{asset("$row->image")}}@else {{asset("assets/noimage.jpg")}}@endif" class="img-fluid" alt="" style="width:100%">
+                                <img id="example_image01" src="@if($row->image){{asset("$row->image")}}@else {{asset("assets/noimage.jpg")}}@endif"  alt="" style="width:200px">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">File</label>
@@ -63,8 +67,9 @@
                                     <option value="published" @if($row->status == "published") selected @endif>Published</option>
                                 </select>
                             </div>
-                            <a href="{{route("$folder.index")}}" class="btn btn-warning">Back</a>
                             <button type="submit" class="btn btn-success">Update</button>
+                            <a href="{{route("$folder.index")}}" class="btn btn-warning">Back</a>
+                        
                         </form>
 
                     </div>

@@ -59,5 +59,14 @@ class LoginController extends Controller
             return redirect("");
         }
     }
+    public function createDummy(){
+
+        $user = User::create([
+            'name' => 'tomnoi werayoot',
+            'email' => 'wry.tomnoi1083@gmail.com',
+            'password' => bcrypt('123456'),
+        ]);
+        
+    }
 }
 

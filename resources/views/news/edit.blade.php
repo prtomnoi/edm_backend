@@ -31,7 +31,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-4 mb-2">
-                                <img id="example_image01" src="@if($news->image){{asset("$news->image")}}@else {{asset("assets/noimage.jpg")}}@endif" class="img-fluid" alt="" style="width:100%">
+                                <img id="example_image01" src="@if($news->image){{asset("$news->image")}}@else {{asset("assets/noimage.jpg")}}@endif" class="img-fluid" alt=""                           <img id="example_image01" src="{{asset("assets/noimage.jpg")}}" class="img-fluid" alt="" style="width:200px">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="">File</label>
@@ -44,8 +44,8 @@
                                     <option value="published" @if($news->status == "published") selected @endif>Published</option>
                                 </select>
                             </div>
-                            <a href="{{route('news.index')}}" class="btn btn-warning">Back</a>
                             <button type="submit" class="btn btn-success">Update</button>
+                            <a href="{{route('news.index')}}" class="btn btn-warning">Back</a>
                         </form>
 
                     </div>

@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('influencer', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('title');
             $table->double('subscribe');
-
             $table->string('facebook');
             $table->string('twitter');
             $table->string('youtube');
             $table->string('instagram');
-
             $table->string('icon')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
