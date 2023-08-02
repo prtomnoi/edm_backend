@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Influencer extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'influencer';
     protected $fillable = ['name','title', 'subscribe', 'facebook', 'twitter', 'youtube', 'instagram', 'icon', 'image', 'status', 'created_by', 'updated_by'];
  
