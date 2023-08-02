@@ -113,6 +113,12 @@ class CampaignController extends Controller
             
             // Upload the image and save its path in the database
             if ($request->hasFile('image')) {
+                if ($campaign->image != null) {
+                    try {
+                        Storage::disk('public')->delete($campaign->image);
+                    } catch (\Exception $e) {
+                    }
+                }
                 $upImage = Helper::upload_image($request->file('image'), 'campaign', 412, 300);
                 $data['image'] = $upImage['image'];
             }
