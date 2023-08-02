@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/cusmike/toastr/toastr.min.css') }}">
 </head>
 
 <body>
@@ -67,7 +68,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="#" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('account.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-users"></i>
                                 </span>
@@ -157,6 +158,8 @@
     <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/cusmike/toastr/toastr.min.js') }}"></script>
+
 </body>
 @yield('scripts')
 <script>

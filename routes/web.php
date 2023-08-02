@@ -1,14 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FunctionController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\InfluencerController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CampaignController;
 
+use App\Http\Controllers as Backend;
 /*
+use App\Http\Controllers\Backend as Backend;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -30,23 +26,25 @@ Route::get('/test-connection', function () {
 
 
 // Route::get('/', function () { return view('login'); });
-Route::get('/', [LoginController::class, 'getLogin']);
-Route::post('/', [LoginController::class, 'postLogin']);
-Route::get('logout', [LoginController::class, 'logOut']);
+Route::get('/', [Backend\LoginController::class, 'getLogin']);
+Route::post('/', [Backend\LoginController::class, 'postLogin']);
+Route::get('logout', [Backend\LoginController::class, 'logOut']);
 // Route::get('regis', [LoginController::class, 'createDummy']);
 
 Route::group(['middleware' => ['Admin']], function () {
-    Route::get('/index' , [HomeController::class , 'index'])->name('admin.home');
+    Route::get('/index' , [Backend\HomeController::class , 'index'])->name('admin.home');
+    Route::post('/uploadimage_text', [Backend\FunctionController::class, 'uploadimage_text'])->name('upload');
+    //== News
+    Route::resource('/news' , Backend\NewsController::class);
+    Route::get('/news/status/{id}', [Backend\NewsController::class, 'status'])->where(['id' => '[0-9]+']);
+    //== Influencer
+    Route::resource('/influencer' , Backend\InfluencerController::class);
+    Route::get('/influencer/status/{id}', [Backend\InfluencerController::class, 'status'])->where(['id' => '[0-9]+']);
+    //== Campaign
+    Route::resource('/campaign' , Backend\CampaignController::class);
+    Route::get('/campaign/status/{id}', [Backend\CampaignController::class, 'status'])->where(['id' => '[0-9]+']);
+    //== Account
+    Route::resource('/account' , Backend\AccountController::class);
 
-    Route::post('/uploadimage_text', [FunctionController::class, 'uploadimage_text'])->name('upload');
-    
-    Route::resource('/news' , NewsController::class);
-    Route::get('/news/status/{id}', [NewsController::class, 'status'])->where(['id' => '[0-9]+']);
-    
-    Route::resource('/influencer' , InfluencerController::class);
-    Route::get('/influencer/status/{id}', [InfluencerController::class, 'status'])->where(['id' => '[0-9]+']);
-    
-    Route::resource('/campaign' , CampaignController::class);
-    Route::get('/campaign/status/{id}', [CampaignController::class, 'status'])->where(['id' => '[0-9]+']);
 });
 
